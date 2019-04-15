@@ -5,10 +5,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.delukesoft.csp.games.CSPDataExtractorService;
+import pl.delukesoft.csp.games.dataextraction.CSPDataExtractorService;
 import pl.delukesoft.csp.games.CSPGameSimulation;
 import pl.delukesoft.csp.games.gamerules.FutoshikiRules;
-import pl.delukesoft.csp.games.inputmodels.FutoshikiItem;
+import pl.delukesoft.csp.games.models.FutoshikiItem;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;

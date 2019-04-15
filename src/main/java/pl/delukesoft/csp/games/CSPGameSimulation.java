@@ -2,6 +2,7 @@ package pl.delukesoft.csp.games;
 
 
 import pl.delukesoft.csp.games.gamerules.Rules;
+import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
 import java.util.List;

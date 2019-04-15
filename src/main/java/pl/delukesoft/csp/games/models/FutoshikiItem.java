@@ -1,4 +1,4 @@
-package pl.delukesoft.csp.games.inputmodels;
+package pl.delukesoft.csp.games.models;
 
 import java.util.ArrayList;
 
