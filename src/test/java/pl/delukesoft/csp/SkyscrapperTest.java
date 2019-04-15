@@ -26,11 +26,11 @@ public class SkyscrapperTest {
         SkyscraperItem skyscraperItem = dataExtractorService.getScascraperItemFromFile("skyscrapper_5_3");
         SkyscrapperRules skyscrapperRules = new SkyscrapperRules(skyscraperItem.bottomBound, skyscraperItem.topBound,
                 skyscraperItem.leftBound, skyscraperItem.rightBound, skyscraperItem.board);
-        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(skyscrapperRules);
-        List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
-        for(int[][] solution: solutions){
-            System.out.println(Arrays.toString(solution[3]));
-        }
+//        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(skyscrapperRules);
+//        List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
+//        for(int[][] solution: solutions){
+//            System.out.println(Arrays.toString(solution[3]));
+//        }
     }
 
 }
