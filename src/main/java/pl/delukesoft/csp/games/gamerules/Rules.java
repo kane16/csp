@@ -1,6 +1,6 @@
 package pl.delukesoft.csp.games.gamerules;
 
-import pl.delukesoft.csp.games.Node;
+import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
 

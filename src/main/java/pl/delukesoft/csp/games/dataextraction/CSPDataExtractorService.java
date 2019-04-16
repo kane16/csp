@@ -1,8 +1,8 @@
-package pl.delukesoft.csp.games;
+package pl.delukesoft.csp.games.dataextraction;
 
 import org.springframework.stereotype.Service;
-import pl.delukesoft.csp.games.inputmodels.FutoshikiItem;
-import pl.delukesoft.csp.games.inputmodels.SkyscraperItem;
+import pl.delukesoft.csp.games.models.FutoshikiItem;
+import pl.delukesoft.csp.games.models.SkyscraperItem;
 
 import java.io.File;
 import java.io.FileNotFoundException;

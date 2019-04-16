@@ -1,7 +1,7 @@
 package pl.delukesoft.csp.games.gamerules;
 
 
-import pl.delukesoft.csp.games.Node;
+import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +29,7 @@ public class FutoshikiRules extends Rules {
             newBoard[i] = board[i].clone();
         }
         newBoard[node.row][node.column] = node.value;
-        if(constraints.stream().anyMatch(constraint -> !isConstraintFulfilled(constraint, newBoard))) {
-            return false;
-        }
-        return true;
+        return constraints.stream().noneMatch(constraint -> !isConstraintFulfilled(constraint, newBoard));
     }
 
     @Override

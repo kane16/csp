@@ -1,4 +1,4 @@
-package pl.delukesoft.csp.games;
+package pl.delukesoft.csp.games.models;
 
 import lombok.AllArgsConstructor;
 
