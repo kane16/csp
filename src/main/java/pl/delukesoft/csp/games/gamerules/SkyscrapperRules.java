@@ -2,6 +2,7 @@ package pl.delukesoft.csp.games.gamerules;
 
 import pl.delukesoft.csp.games.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SkyscrapperRules extends Rules{
@@ -47,6 +48,11 @@ public class SkyscrapperRules extends Rules{
         }
         board = newBoard;
         return true;
+    }
+
+    @Override
+    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn, ArrayList<Integer>[][] possibilities) {
+        return false;
     }
 
     private boolean isBottomConstraintFulfilled(int bottomConstraint, int[][] board, int value, int column, int row) {

@@ -8,6 +8,11 @@ import java.util.List;
 public class MostConstrainingFirstHeuristic extends Heuristic {
 
 
+    @Override
+    public void setOrderList() {
+
+    }
+
     public MostConstrainingFirstHeuristic(Rules rules) {
         super(rules);
     }

@@ -22,7 +22,7 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
     }
 
     private void solveWithBacktracking(Node node) {
-        if(heuristic.getNextAvailableNode(node.column, node.row)==null && rules.isConstraintsFulfilled(node)){
+        if(heuristic.getNextAvailableNode(node.row, node.column)==null && rules.isConstraintsFulfilled(node)){
             assignAndCopyBoard(node);
         }else if(rules.isConstraintsFulfilled(node)){
             assignAndFindSolution(node);

@@ -11,6 +11,7 @@ import pl.delukesoft.csp.games.gamerules.FutoshikiRules;
 import pl.delukesoft.csp.games.heuristic.NoHeuristic;
 import pl.delukesoft.csp.games.inputmodels.FutoshikiItem;
 import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
+import pl.delukesoft.csp.games.solutionsearch.ForwardCheckingAlgorithm;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -25,14 +26,20 @@ public class FutoshikiRulesTest {
 
     @Test
     public void testFutoshikiForConstraints() throws FileNotFoundException {
-        FutoshikiItem futoshikiItem = dataExtractorService.getFutoshikiItemFromFile("futoshiki_4_0");
-        FutoshikiRules futoshiki = new FutoshikiRules(futoshikiItem.constraints, futoshikiItem.contentTable);
-        NoHeuristic heuristic = new NoHeuristic(futoshiki);
-        BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(futoshiki, heuristic);
-        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(futoshiki, heuristic, backtrackingAlgorithm);
+        FutoshikiItem item = dataExtractorService.getFutoshikiItemFromFile("futoshiki_5_0");
+        FutoshikiRules rules = new FutoshikiRules(item.constraints, item.contentTable);
+        NoHeuristic heuristic = new NoHeuristic(rules);
+        ForwardCheckingAlgorithm forwardCheckingAlgorithm = new ForwardCheckingAlgorithm(rules, heuristic);
+        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, forwardCheckingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
         for(int[][] solution: solutions){
+            System.out.println("[");
+            System.out.println(Arrays.toString(solution[0]));
+            System.out.println(Arrays.toString(solution[1]));
+            System.out.println(Arrays.toString(solution[2]));
             System.out.println(Arrays.toString(solution[3]));
+            System.out.println(Arrays.toString(solution[4]));
+            System.out.println("]");
         }
     }
 

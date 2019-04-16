@@ -9,11 +9,8 @@ import java.util.List;
 
 public class NoHeuristic extends Heuristic{
 
-    List<Node> orderList = new ArrayList<>();
-
     public NoHeuristic(Rules rules) {
         super(rules);
-        setOrderList();
     }
 
     @Override
@@ -23,7 +20,7 @@ public class NoHeuristic extends Heuristic{
                 .findFirst().orElse(null);
     }
     
-    private void setOrderList(){
+    public void setOrderList(){
         for(int i=0 ; i<rules.board.length; i++){
             for(int j=0 ; j<rules.board[0].length; j++){
                 if(rules.board[i][j] == 0){

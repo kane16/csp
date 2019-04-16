@@ -7,6 +7,11 @@ import java.util.List;
 
 public class LeastConstrainingFirstHeuristic extends Heuristic{
 
+    @Override
+    public void setOrderList() {
+
+    }
+
     public LeastConstrainingFirstHeuristic(Rules rules) {
         super(rules);
     }

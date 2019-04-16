@@ -3,6 +3,7 @@ package pl.delukesoft.csp.games.gamerules;
 
 import pl.delukesoft.csp.games.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FutoshikiRules extends Rules {
@@ -33,6 +34,13 @@ public class FutoshikiRules extends Rules {
         }
         return true;
     }
+
+    @Override
+    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn,
+                                                                          ArrayList<Integer>[][] possibilities) {
+        return false;
+    }
+
 
     private boolean isConstraintFulfilled(String constraint, int[][] board) {
         int value1 = board[Character.getNumericValue(constraint.charAt(0))-1]

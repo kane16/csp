@@ -8,7 +8,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.delukesoft.csp.games.CSPDataExtractorService;
 import pl.delukesoft.csp.games.CSPGameSimulation;
 import pl.delukesoft.csp.games.gamerules.SkyscrapperRules;
+import pl.delukesoft.csp.games.heuristic.NoHeuristic;
 import pl.delukesoft.csp.games.inputmodels.SkyscraperItem;
+import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -23,14 +25,22 @@ public class SkyscrapperTest {
 
     @Test
     public void testSkyscrapperForConstraints() throws FileNotFoundException {
-        SkyscraperItem skyscraperItem = dataExtractorService.getScascraperItemFromFile("skyscrapper_5_3");
-        SkyscrapperRules skyscrapperRules = new SkyscrapperRules(skyscraperItem.bottomBound, skyscraperItem.topBound,
-                skyscraperItem.leftBound, skyscraperItem.rightBound, skyscraperItem.board);
-//        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(skyscrapperRules);
-//        List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
-//        for(int[][] solution: solutions){
-//            System.out.println(Arrays.toString(solution[3]));
-//        }
+        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("test_sky_5_2");
+        SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
+                item.board);
+        NoHeuristic heuristic = new NoHeuristic(rules);
+        BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
+        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
+        List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
+        for(int[][] solution: solutions){
+            System.out.println("[");
+            System.out.println(Arrays.toString(solution[0]));
+            System.out.println(Arrays.toString(solution[1]));
+            System.out.println(Arrays.toString(solution[2]));
+            System.out.println(Arrays.toString(solution[3]));
+            System.out.println(Arrays.toString(solution[4]));
+            System.out.println("]");
+        }
     }
 
 }

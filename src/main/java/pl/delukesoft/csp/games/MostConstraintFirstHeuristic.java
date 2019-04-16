@@ -6,6 +6,11 @@ import pl.delukesoft.csp.games.heuristic.Heuristic;
 
 public class MostConstraintFirstHeuristic extends Heuristic {
 
+    @Override
+    public void setOrderList() {
+
+    }
+
     public MostConstraintFirstHeuristic(Rules rules) {
         super(rules);
     }
