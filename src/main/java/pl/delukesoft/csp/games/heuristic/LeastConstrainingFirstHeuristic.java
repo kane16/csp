@@ -1,7 +1,7 @@
 package pl.delukesoft.csp.games.heuristic;
 
-import pl.delukesoft.csp.games.Node;
 import pl.delukesoft.csp.games.gamerules.Rules;
+import pl.delukesoft.csp.games.models.Node;
 
 import java.util.List;
 

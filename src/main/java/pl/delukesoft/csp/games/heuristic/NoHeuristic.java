@@ -1,8 +1,8 @@
 package pl.delukesoft.csp.games.heuristic;
 
 import org.springframework.stereotype.Service;
-import pl.delukesoft.csp.games.Node;
 import pl.delukesoft.csp.games.gamerules.Rules;
+import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
 import java.util.List;

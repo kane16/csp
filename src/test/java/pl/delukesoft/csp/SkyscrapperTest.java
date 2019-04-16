@@ -5,11 +5,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.delukesoft.csp.games.CSPDataExtractorService;
 import pl.delukesoft.csp.games.CSPGameSimulation;
+import pl.delukesoft.csp.games.dataextraction.CSPDataExtractorService;
 import pl.delukesoft.csp.games.gamerules.SkyscrapperRules;
 import pl.delukesoft.csp.games.heuristic.NoHeuristic;
-import pl.delukesoft.csp.games.inputmodels.SkyscraperItem;
+import pl.delukesoft.csp.games.models.SkyscraperItem;
 import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
 
 import java.io.FileNotFoundException;
