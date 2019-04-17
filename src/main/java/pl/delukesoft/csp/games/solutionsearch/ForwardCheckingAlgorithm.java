@@ -14,7 +14,14 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
     public ForwardCheckingAlgorithm(Rules rules, Heuristic heuristic) {
         super(rules, heuristic);
         fillPossibiliesTable();
-        System.out.println();
+    }
+
+    @Override
+    public List<int[][]> runAlgorithm() {
+
+        checkSolutionsOnNode(heuristic.getNextAvailableNode(-1, -1));
+
+        return solutions;
     }
 
     private void fillPossibiliesTable() {
@@ -24,12 +31,6 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
                 list.add(n);
             }
             possibilities[heuristic.orderList.get(i).row][heuristic.orderList.get(i).column]=list;
-        }
-    }
-
-    private void checkSolutionsOnNode(Node nextNode) {
-        for(int i=1 ; i<rules.board.length+1 ; i++){
-            solveWithForwardChecking(new Node(i, nextNode.row, nextNode.column));
         }
     }
 
@@ -47,20 +48,19 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
             Node nextNode = heuristic.getNextAvailableNode(node.row, node.column);
             checkSolutionsOnNode(nextNode);
         }
-        ArrayList<Integer> cellPossibilities = new ArrayList<>();
-        for(int i=1 ; i<rules.board.length+1 ; i++){
-            cellPossibilities.add(i);
-        }
-        possibilities[node.row][node.column] = cellPossibilities;
         rules.board[node.row][node.column] = 0;
     }
 
-    @Override
-    public List<int[][]> runAlgorithm() {
-
-        checkSolutionsOnNode(heuristic.getNextAvailableNode(-1, -1));
-
-        return solutions;
+    private void checkSolutionsOnNode(Node nextNode) {
+        ArrayList<Integer> possibleList = possibilities[nextNode.row][nextNode.column];
+        for(Integer i: possibleList){
+            solveWithForwardChecking(new Node(i, nextNode.row, nextNode.column));
+            ArrayList<Integer> cellPossibilities = new ArrayList<>();
+            for(int j=1 ; j<rules.board.length+1 ; j++){
+                cellPossibilities.add(j);
+            }
+            possibilities[nextNode.row][nextNode.column] = cellPossibilities;
+        }
     }
 
 }

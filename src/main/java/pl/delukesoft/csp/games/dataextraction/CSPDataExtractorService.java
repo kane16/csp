@@ -45,12 +45,12 @@ public class CSPDataExtractorService {
     public FutoshikiItem getFutoshikiItemFromFile(String filename) throws FileNotFoundException {
         FutoshikiItem futoshikiItem = new FutoshikiItem();
         Scanner sc = new Scanner(getDataInputFile(filename));
-        futoshikiItem.maxNumber = sc.nextInt();
+        futoshikiItem.size = sc.nextInt();
         sc.nextLine();
         sc.nextLine();
-        int[][] futoshikiContent = new int[futoshikiItem.maxNumber][futoshikiItem.maxNumber];
-        for(int i=0; i<futoshikiItem.maxNumber; i++){
-            int[] futoshikiRow = new int[futoshikiItem.maxNumber];
+        int[][] futoshikiContent = new int[futoshikiItem.size][futoshikiItem.size];
+        for(int i = 0; i<futoshikiItem.size; i++){
+            int[] futoshikiRow = new int[futoshikiItem.size];
             String nextLine = sc.nextLine();
             String[] numbers = nextLine.split(";");
             for(int j=0 ; j<numbers.length; j++){
@@ -58,7 +58,7 @@ public class CSPDataExtractorService {
             }
             futoshikiContent[i] = futoshikiRow;
         }
-        futoshikiItem.contentTable = futoshikiContent;
+        futoshikiItem.board = futoshikiContent;
         sc.nextLine();
         ArrayList<String> constraints = new ArrayList<>();
         while(sc.hasNextLine()){

@@ -2,6 +2,7 @@ package pl.delukesoft.csp.games.heuristic;
 
 import org.springframework.stereotype.Service;
 import pl.delukesoft.csp.games.gamerules.Rules;
+import pl.delukesoft.csp.games.models.Item;
 import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public abstract class Heuristic {
 
     public abstract void setOrderList();
 
-    Rules rules;
+    public Item item;
 
-    public Heuristic(Rules rules){
-        this.rules = rules;
+    public Heuristic(Item item){
+        this.item = item;
         setOrderList();
     }
 

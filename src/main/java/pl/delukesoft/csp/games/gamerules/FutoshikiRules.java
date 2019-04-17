@@ -1,6 +1,7 @@
 package pl.delukesoft.csp.games.gamerules;
 
 
+import pl.delukesoft.csp.games.heuristic.Heuristic;
 import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
@@ -10,9 +11,10 @@ public class FutoshikiRules extends Rules {
 
     public List<String> constraints;
 
-    public FutoshikiRules(List<String> constraints, int[][] board){
+    public FutoshikiRules(List<String> constraints, int[][] board, Heuristic heuristic){
         this.constraints = constraints;
         this.board = board;
+        this.heuristic = heuristic;
     }
 
     public boolean isConstraintsFulfilled(Node node){
@@ -30,12 +32,6 @@ public class FutoshikiRules extends Rules {
         }
         newBoard[node.row][node.column] = node.value;
         return constraints.stream().noneMatch(constraint -> !isConstraintFulfilled(constraint, newBoard));
-    }
-
-    @Override
-    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn,
-                                                                          ArrayList<Integer>[][] possibilities) {
-        return false;
     }
 
 

@@ -28,7 +28,7 @@ public class SkyscrapperTest {
         SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("test_sky_5_2");
         SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
                 item.board);
-        NoHeuristic heuristic = new NoHeuristic(rules);
+        NoHeuristic heuristic = new NoHeuristic(item);
         BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
