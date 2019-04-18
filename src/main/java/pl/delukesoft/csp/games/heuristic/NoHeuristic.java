@@ -15,6 +15,19 @@ public class NoHeuristic extends Heuristic{
     }
 
     @Override
+    public void clearAllChoices(int row, int column, List<Integer>[][] possibilities) {
+        Node currentNode = new Node(0, row, column);
+        while(currentNode != null){
+            ArrayList<Integer> cellPossibilities = new ArrayList<>();
+            for(int j=1 ; j<item.size+1 ; j++){
+                cellPossibilities.add(j);
+            }
+            possibilities[currentNode.row][currentNode.column] = cellPossibilities;
+            currentNode = getNextAvailableNode(currentNode.row, currentNode.column);
+        }
+    }
+
+    @Override
     public Node getNextAvailableNode(int row, int column) {
         return this.orderList.stream()
                 .filter(node -> (node.row == row && node.column > column) || node.row > row)

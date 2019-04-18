@@ -21,6 +21,8 @@ public abstract class Heuristic {
         setOrderList();
     }
 
+    public abstract void clearAllChoices(int row, int column, List<Integer>[][] possibilities);
+
     public abstract Node getNextAvailableNode(int row, int column);
 
 }

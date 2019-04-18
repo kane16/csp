@@ -55,11 +55,7 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
         ArrayList<Integer> possibleList = possibilities[nextNode.row][nextNode.column];
         for(Integer i: possibleList){
             solveWithForwardChecking(new Node(i, nextNode.row, nextNode.column));
-            ArrayList<Integer> cellPossibilities = new ArrayList<>();
-            for(int j=1 ; j<rules.board.length+1 ; j++){
-                cellPossibilities.add(j);
-            }
-            possibilities[nextNode.row][nextNode.column] = cellPossibilities;
+            heuristic.clearAllChoices(nextNode.row, nextNode.column, possibilities);
         }
     }
 
