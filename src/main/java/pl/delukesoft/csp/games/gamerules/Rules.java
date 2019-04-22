@@ -15,7 +15,7 @@ public abstract class Rules {
 
     public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn,
                                                                                    ArrayList<Integer>[][] possibilities){
-        Node nextNode = new Node(0, currentRow, currentColumn);
+        Node nextNode = heuristic.getNextAvailableNode(currentRow, currentColumn);
         while(nextNode != null){
             ArrayList<Integer> compliantValues = new ArrayList<>();
             ArrayList<Integer> possibleList = possibilities[nextNode.row][nextNode.column];

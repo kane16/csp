@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.delukesoft.csp.games.CSPGameSimulation;
 import pl.delukesoft.csp.games.dataextraction.CSPDataExtractorService;
 import pl.delukesoft.csp.games.gamerules.SkyscrapperRules;
-import pl.delukesoft.csp.games.heuristic.NoHeuristic;
+import pl.delukesoft.csp.games.heuristic.RandomHeuristic;
 import pl.delukesoft.csp.games.models.SkyscraperItem;
 import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
 
@@ -28,7 +28,7 @@ public class SkyscrapperTest {
         SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("test_sky_5_2");
         SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
                 item.board);
-        NoHeuristic heuristic = new NoHeuristic(item);
+        RandomHeuristic heuristic = new RandomHeuristic(item);
         BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();

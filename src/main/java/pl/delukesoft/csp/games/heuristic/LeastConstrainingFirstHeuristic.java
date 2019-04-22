@@ -8,13 +8,8 @@ import java.util.List;
 
 public class LeastConstrainingFirstHeuristic extends Heuristic{
 
-    public LeastConstrainingFirstHeuristic(Item item) {
+    public LeastConstrainingFirstHeuristic(Item item, Rules rules) {
         super(item);
-    }
-
-    @Override
-    public void clearAllChoices(int row, int column, List<Integer>[][] possibilities) {
-
     }
 
     @Override

@@ -14,6 +14,8 @@ public abstract class SearchSolutionAlgorithm {
 
     int backtrackCounter;
 
+    int nodesCounter;
+
     List<int[][]> solutions = new ArrayList<>();
 
     public SearchSolutionAlgorithm(Rules rules, Heuristic heuristic){

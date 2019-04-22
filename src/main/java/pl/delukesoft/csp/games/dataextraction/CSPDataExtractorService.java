@@ -2,6 +2,7 @@ package pl.delukesoft.csp.games.dataextraction;
 
 import org.springframework.stereotype.Service;
 import pl.delukesoft.csp.games.models.FutoshikiItem;
+import pl.delukesoft.csp.games.models.Item;
 import pl.delukesoft.csp.games.models.SkyscraperItem;
 
 import java.io.File;
@@ -65,8 +66,25 @@ public class CSPDataExtractorService {
             String constraint = replaceLettersWithIndexes(sc.nextLine());
             constraints.add(constraint);
         }
+        IncrementConstraintValuesForFutoshiki(constraints, futoshikiItem);
         futoshikiItem.constraints = constraints;
         return futoshikiItem;
+    }
+
+    private void IncrementConstraintValuesForFutoshiki(List<String> constraints, Item item) {
+        for (String constraint :
+                constraints) {
+            int value1 = item.board[Character.getNumericValue(constraint.charAt(0))-1]
+                    [Character.getNumericValue(constraint.charAt(1))-1];
+            int value2 = item.board[Character.getNumericValue(constraint.charAt(3))-1]
+                    [Character.getNumericValue(constraint.charAt(4))-1];
+            if(value1 != 0)
+                item.constraintNodes[Character.getNumericValue(constraint.charAt(0))-1]
+                        [Character.getNumericValue(constraint.charAt(1))-1]++;
+            if(value2 != 0)
+                item.constraintNodes[Character.getNumericValue(constraint.charAt(3))-1]
+                        [Character.getNumericValue(constraint.charAt(4))-1]++;
+        }
     }
 
     private String replaceLettersWithIndexes(String constraint) {

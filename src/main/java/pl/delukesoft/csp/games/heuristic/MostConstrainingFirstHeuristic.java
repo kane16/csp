@@ -14,11 +14,6 @@ public class MostConstrainingFirstHeuristic extends Heuristic {
     }
 
     @Override
-    public void clearAllChoices(int row, int column, List<Integer>[][] possibilities) {
-
-    }
-
-    @Override
     public void setOrderList() {
 
     }

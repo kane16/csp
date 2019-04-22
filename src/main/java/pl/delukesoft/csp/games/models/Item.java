@@ -6,4 +6,6 @@ public abstract class Item {
 
     public int[][] board;
 
+    public int[][] constraintNodes;
+
 }

@@ -8,23 +8,10 @@ import pl.delukesoft.csp.games.models.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoHeuristic extends Heuristic{
+public class RandomHeuristic extends Heuristic{
 
-    public NoHeuristic(Item item) {
+    public RandomHeuristic(Item item) {
         super(item);
-    }
-
-    @Override
-    public void clearAllChoices(int row, int column, List<Integer>[][] possibilities) {
-        Node currentNode = new Node(0, row, column);
-        while(currentNode != null){
-            ArrayList<Integer> cellPossibilities = new ArrayList<>();
-            for(int j=1 ; j<item.size+1 ; j++){
-                cellPossibilities.add(j);
-            }
-            possibilities[currentNode.row][currentNode.column] = cellPossibilities;
-            currentNode = getNextAvailableNode(currentNode.row, currentNode.column);
-        }
     }
 
     @Override

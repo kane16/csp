@@ -17,6 +17,8 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
 
         checkSolutionsOnNode(heuristic.getNextAvailableNode(-1,-1));
 
+        System.out.println(backtrackCounter);
+        System.out.println(nodesCounter);
         return solutions;
 
     }
@@ -38,6 +40,7 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
 
     private void checkSolutionsOnNode(Node nextNode) {
         for(int i=1 ; i<rules.board.length+1 ; i++){
+            nodesCounter++;
             solveWithBacktracking(new Node(i, nextNode.row, nextNode.column));
         }
     }
