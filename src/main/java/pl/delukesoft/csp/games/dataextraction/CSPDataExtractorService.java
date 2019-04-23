@@ -40,7 +40,31 @@ public class CSPDataExtractorService {
             }
         }
         skyscraperItem.board = new int[skyscraperItem.size][skyscraperItem.size];
+        skyscraperItem.constraintNodes = new int[skyscraperItem.size][skyscraperItem.size];
+        incrementConstraintValuesForSkyscrapper(skyscraperItem);
         return skyscraperItem;
+    }
+
+    private void incrementConstraintValuesForSkyscrapper(SkyscraperItem skyscraperItem){
+        for(int i=0 ; i<skyscraperItem.size ; i++){
+            for(int j=0 ; j<skyscraperItem.size ; j++){
+                if(skyscraperItem.topBound.get(i) != 0)
+                    skyscraperItem.constraintNodes[i][j]++;
+                if(skyscraperItem.bottomBound.get(i) != 0)
+                    skyscraperItem.constraintNodes[i][j]++;
+                if(skyscraperItem.leftBound.get(j) != 0)
+                    skyscraperItem.constraintNodes[i][j]++;
+                if(skyscraperItem.rightBound.get(j) != 0)
+                    skyscraperItem.constraintNodes[i][j]++;
+                if(skyscraperItem.board[i][j] != 0){
+                    for(int k=0 ; k<skyscraperItem.size ; k++){
+                        skyscraperItem.constraintNodes[k][j]++;
+                        skyscraperItem.constraintNodes[i][k]++;
+                    }
+                }
+            }
+        }
+
     }
 
     public FutoshikiItem getFutoshikiItemFromFile(String filename) throws FileNotFoundException {
@@ -66,24 +90,31 @@ public class CSPDataExtractorService {
             String constraint = replaceLettersWithIndexes(sc.nextLine());
             constraints.add(constraint);
         }
-        IncrementConstraintValuesForFutoshiki(constraints, futoshikiItem);
+        futoshikiItem.constraintNodes = new int[futoshikiItem.size][futoshikiItem.size];
+        incrementConstraintValuesForFutoshiki(constraints, futoshikiItem);
         futoshikiItem.constraints = constraints;
         return futoshikiItem;
     }
 
-    private void IncrementConstraintValuesForFutoshiki(List<String> constraints, Item item) {
+    private void incrementConstraintValuesForFutoshiki(List<String> constraints, Item item) {
         for (String constraint :
                 constraints) {
-            int value1 = item.board[Character.getNumericValue(constraint.charAt(0))-1]
-                    [Character.getNumericValue(constraint.charAt(1))-1];
-            int value2 = item.board[Character.getNumericValue(constraint.charAt(3))-1]
-                    [Character.getNumericValue(constraint.charAt(4))-1];
-            if(value1 != 0)
-                item.constraintNodes[Character.getNumericValue(constraint.charAt(0))-1]
+            item.constraintNodes[Character.getNumericValue(constraint.charAt(0))-1]
                         [Character.getNumericValue(constraint.charAt(1))-1]++;
-            if(value2 != 0)
-                item.constraintNodes[Character.getNumericValue(constraint.charAt(3))-1]
+            item.constraintNodes[Character.getNumericValue(constraint.charAt(3))-1]
                         [Character.getNumericValue(constraint.charAt(4))-1]++;
+        }
+        for(int i=0 ; i<item.board.length ;i++){
+            for(int j=0 ; j<item.board.length ;j++){
+                if(item.board[i][j] != 0){
+                    for(int k=0 ; k<item.size ; k++){
+                        if(k!=i)
+                            item.constraintNodes[k][j]++;
+                        if(k!=j)
+                            item.constraintNodes[i][k]++;
+                    }
+                }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package pl.delukesoft.csp.games.gamerules;
 
+import pl.delukesoft.csp.games.heuristic.Heuristic;
 import pl.delukesoft.csp.games.models.Node;
 
 import java.util.ArrayList;
@@ -13,12 +14,13 @@ public class SkyscrapperRules extends Rules{
     public List<Integer> right;
 
     public SkyscrapperRules(List<Integer> bottom, List<Integer> top, List<Integer> left,
-                            List<Integer> right, int[][] board){
+                            List<Integer> right, int[][] board, Heuristic heuristic){
         this.bottom = bottom;
         this.left = left;
         this.top = top;
         this.right = right;
         this.board = board;
+        this.heuristic = heuristic;
     }
 
     public boolean isConstraintsFulfilled(Node node){
@@ -48,11 +50,6 @@ public class SkyscrapperRules extends Rules{
         }
         board = newBoard;
         return true;
-    }
-
-    @Override
-    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn, ArrayList<Integer>[][] possibilities) {
-        return false;
     }
 
     private boolean isBottomConstraintFulfilled(int bottomConstraint, int[][] board, int value, int column, int row) {

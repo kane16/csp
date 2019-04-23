@@ -11,6 +11,7 @@ import pl.delukesoft.csp.games.gamerules.SkyscrapperRules;
 import pl.delukesoft.csp.games.heuristic.RandomHeuristic;
 import pl.delukesoft.csp.games.models.SkyscraperItem;
 import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
+import pl.delukesoft.csp.games.solutionsearch.ForwardCheckingAlgorithm;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -25,20 +26,17 @@ public class SkyscrapperTest {
 
     @Test
     public void testSkyscrapperForConstraints() throws FileNotFoundException {
-        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("test_sky_5_2");
-        SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
-                item.board);
+        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("skyscrapper_4_0");
         RandomHeuristic heuristic = new RandomHeuristic(item);
+        SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
+                item.board, heuristic);
         BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
         for(int[][] solution: solutions){
             System.out.println("[");
-            System.out.println(Arrays.toString(solution[0]));
-            System.out.println(Arrays.toString(solution[1]));
-            System.out.println(Arrays.toString(solution[2]));
-            System.out.println(Arrays.toString(solution[3]));
-            System.out.println(Arrays.toString(solution[4]));
+            for(int i=0 ; i<solution.length;i++)
+                System.out.println(Arrays.toString(solution[i]));
             System.out.println("]");
         }
     }

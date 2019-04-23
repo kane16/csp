@@ -13,9 +13,9 @@ public abstract class Rules {
 
     public abstract boolean isConstraintsFulfilled(Node node);
 
-    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(int currentRow, int currentColumn,
-                                                                                   ArrayList<Integer>[][] possibilities){
-        Node nextNode = heuristic.getNextAvailableNode(currentRow, currentColumn);
+    public boolean eliminateForwardPossibilitiesAndReturnIfCanMoveForward(ArrayList<Integer>[][] possibilities){
+        int currentIndex = heuristic.currentIndex;
+        Node nextNode = heuristic.getNextAvailableNodeAndSetPointer();
         while(nextNode != null){
             ArrayList<Integer> compliantValues = new ArrayList<>();
             ArrayList<Integer> possibleList = possibilities[nextNode.row][nextNode.column];
@@ -27,10 +27,12 @@ public abstract class Rules {
             }
             possibilities[nextNode.row][nextNode.column] = compliantValues;
             if(compliantValues.size()==0){
+                heuristic.currentIndex = currentIndex;
                 return false;
             }
-            nextNode = heuristic.getNextAvailableNode(nextNode.row, nextNode.column);
+            nextNode = heuristic.getNextAvailableNodeAndSetPointer();
         }
+        heuristic.currentIndex = currentIndex;
         return true;
     }
 

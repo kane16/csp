@@ -20,8 +20,8 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
     public List<int[][]> runAlgorithm() {
 
 
-        rules.eliminateForwardPossibilitiesAndReturnIfCanMoveForward(-1,-1, possibilities);
-        checkSolutionsOnNode(heuristic.getNextAvailableNode(-1, -1));
+        rules.eliminateForwardPossibilitiesAndReturnIfCanMoveForward(possibilities);
+        checkSolutionsOnNode(heuristic.getNextAvailableNode());
 
         System.out.println(backtrackCounter);
         System.out.println(nodesCounter);
@@ -39,7 +39,7 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
     }
 
     private void solveWithForwardChecking(Node node) {
-        if(heuristic.getNextAvailableNode(node.row, node.column) == null && rules.isConstraintsFulfilled(node)){
+        if(heuristic.getNextAvailableNode() == null && rules.isConstraintsFulfilled(node)){
             assignAndCopyBoard(node);
         }else if(rules.isConstraintsFulfilled(node)){
             assignAndFindSolution(node);
@@ -62,19 +62,25 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
 
     private void assignAndFindSolution(Node node){
         rules.board[node.row][node.column] = node.value;
-        if(rules.eliminateForwardPossibilitiesAndReturnIfCanMoveForward(node.row, node.column, possibilities)){
-            Node nextNode = heuristic.getNextAvailableNode(node.row, node.column);
+        heuristic.getNextAvailableNodeAndSetPointer();
+        Node nextNode = heuristic.getNextAvailableNode();
+        if(rules.eliminateForwardPossibilitiesAndReturnIfCanMoveForward(possibilities)){
             checkSolutionsOnNode(nextNode);
         }else backtrackCounter++;
+        heuristic.setPointerToPrevious();
+        heuristic.clearAllChoices(node.row, node.column, possibilities);
         rules.board[node.row][node.column] = 0;
     }
 
     private void checkSolutionsOnNode(Node nextNode) {
+        if(nextNode==null){
+            copyBoardAndAddToSolution();
+            return;
+        }
         ArrayList<Integer> possibleList = possibilities[nextNode.row][nextNode.column];
         for(Integer i: possibleList){
             nodesCounter++;
             solveWithForwardChecking(new Node(i, nextNode.row, nextNode.column));
-            heuristic.clearAllChoices(nextNode.row, nextNode.column, possibilities);
         }
     }
 

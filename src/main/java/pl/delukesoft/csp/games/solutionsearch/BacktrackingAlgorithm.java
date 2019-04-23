@@ -15,7 +15,7 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
     @Override
     public List<int[][]> runAlgorithm() {
 
-        checkSolutionsOnNode(heuristic.getNextAvailableNode(-1,-1));
+        checkSolutionsOnNode(heuristic.getNextAvailableNodeAndSetPointer());
 
         System.out.println(backtrackCounter);
         System.out.println(nodesCounter);
@@ -24,7 +24,7 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
     }
 
     private void solveWithBacktracking(Node node) {
-        if(heuristic.getNextAvailableNode(node.row, node.column)==null && rules.isConstraintsFulfilled(node)){
+        if(heuristic.getNextAvailableNode()==null && rules.isConstraintsFulfilled(node)){
             assignAndCopyBoard(node);
         }else if(rules.isConstraintsFulfilled(node)){
             assignAndFindSolution(node);
@@ -33,12 +33,18 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
 
     private void assignAndFindSolution(Node node) {
         rules.board[node.row][node.column] = node.value;
-        Node nextNode = heuristic.getNextAvailableNode(node.row, node.column);
+        int currentIndex = heuristic.currentIndex;
+        Node nextNode = heuristic.getNextAvailableNodeAndSetPointer();
         checkSolutionsOnNode(nextNode);
+        heuristic.currentIndex = currentIndex;
         rules.board[node.row][node.column] = 0;
     }
 
     private void checkSolutionsOnNode(Node nextNode) {
+        if(nextNode==null){
+            copyBoardAndAddToSolution();
+            return;
+        }
         for(int i=1 ; i<rules.board.length+1 ; i++){
             nodesCounter++;
             solveWithBacktracking(new Node(i, nextNode.row, nextNode.column));

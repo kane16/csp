@@ -14,13 +14,6 @@ public class RandomHeuristic extends Heuristic{
         super(item);
     }
 
-    @Override
-    public Node getNextAvailableNode(int row, int column) {
-        return this.orderList.stream()
-                .filter(node -> (node.row == row && node.column > column) || node.row > row)
-                .findFirst().orElse(null);
-    }
-    
     public void setOrderList(){
         for(int i=0 ; i<item.board.length; i++){
             for(int j=0 ; j<item.board[0].length; j++){

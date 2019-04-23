@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.delukesoft.csp.games.CSPGameSimulation;
 import pl.delukesoft.csp.games.dataextraction.CSPDataExtractorService;
 import pl.delukesoft.csp.games.gamerules.FutoshikiRules;
+import pl.delukesoft.csp.games.heuristic.MostConstrainingFirstHeuristic;
 import pl.delukesoft.csp.games.heuristic.RandomHeuristic;
 import pl.delukesoft.csp.games.models.FutoshikiItem;
 import pl.delukesoft.csp.games.solutionsearch.BacktrackingAlgorithm;
@@ -27,17 +28,15 @@ public class FutoshikiRulesTest {
     @Test
     public void testFutoshikiForConstraints() throws FileNotFoundException {
         FutoshikiItem item = dataExtractorService.getFutoshikiItemFromFile("test_futo_6_1");
-        RandomHeuristic heuristic = new RandomHeuristic(item);
+        MostConstrainingFirstHeuristic heuristic = new MostConstrainingFirstHeuristic(item);
         FutoshikiRules rules = new FutoshikiRules(item.constraints, item.board, heuristic);
         BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
         for(int[][] solution: solutions){
             System.out.println("[");
-            System.out.println(Arrays.toString(solution[0]));
-            System.out.println(Arrays.toString(solution[1]));
-            System.out.println(Arrays.toString(solution[2]));
-            System.out.println(Arrays.toString(solution[3]));
+            for(int i=0 ; i<solution.length;i++)
+                System.out.println(Arrays.toString(solution[i]));
             System.out.println("]");
         }
     }
@@ -45,17 +44,15 @@ public class FutoshikiRulesTest {
     @Test
     public void testFutoshikiForConstraintsForwardChecking() throws FileNotFoundException {
         FutoshikiItem item = dataExtractorService.getFutoshikiItemFromFile("test_futo_6_1");
-        RandomHeuristic heuristic = new RandomHeuristic(item);
+        MostConstrainingFirstHeuristic heuristic = new MostConstrainingFirstHeuristic(item);
         FutoshikiRules rules = new FutoshikiRules(item.constraints, item.board, heuristic);
         ForwardCheckingAlgorithm forwardCheckingAlgorithm = new ForwardCheckingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, forwardCheckingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
         for(int[][] solution: solutions){
             System.out.println("[");
-            System.out.println(Arrays.toString(solution[0]));
-            System.out.println(Arrays.toString(solution[1]));
-            System.out.println(Arrays.toString(solution[2]));
-            System.out.println(Arrays.toString(solution[3]));
+            for(int i=0 ; i<solution.length;i++)
+                System.out.println(Arrays.toString(solution[i]));
             System.out.println("]");
         }
     }
