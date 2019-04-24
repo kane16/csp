@@ -29,6 +29,9 @@ public class SkyscrapperRules extends Rules{
         int leftConstraint = left.get(node.row);
         int rightConstraint = right.get(node.row);
 
+        boolean isVerticalFilled = true;
+        boolean isHorizontalFilled = true;
+
         for(int i=0 ; i<board.length ; i++){
             if(node.value == board[node.row][i]){
                 return false;
@@ -42,13 +45,21 @@ public class SkyscrapperRules extends Rules{
             newBoard[i] = board[i].clone();
         }
         newBoard[node.row][node.column]=node.value;
-        if(!isTopConstraintFulfilled(topConstraint, newBoard, node.value, node.column, node.row)
-        || !isBottomConstraintFulfilled(bottomConstraint, newBoard, node.value, node.column, node.row)
-        || !isLeftConstraintFulfilled(leftConstraint, newBoard, node.value, node.column, node.row)
-        || !isRightConstraintFulfilled(rightConstraint, newBoard, node.value, node.column, node.row)) {
+
+        for(int i=0 ; i<newBoard.length ; i++){
+            if(0 == newBoard[node.row][i]){
+                isVerticalFilled = false;
+            }
+            if(0 == newBoard[i][node.column]){
+                isHorizontalFilled = false;
+            }
+        }
+        if((!isTopConstraintFulfilled(topConstraint, newBoard, node.value, node.column, node.row))
+        || (!isBottomConstraintFulfilled(bottomConstraint, newBoard, node.value, node.column, node.row))
+        || ((!isLeftConstraintFulfilled(leftConstraint, newBoard, node.value, node.column, node.row)))
+        || (!isRightConstraintFulfilled(rightConstraint, newBoard, node.value, node.column, node.row))) {
             return false;
         }
-        board = newBoard;
         return true;
     }
 

@@ -25,12 +25,29 @@ public class SkyscrapperTest {
     CSPDataExtractorService dataExtractorService;
 
     @Test
-    public void testSkyscrapperForConstraints() throws FileNotFoundException {
-        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("skyscrapper_4_0");
+    public void testSkyscrapperForBacktracking() throws FileNotFoundException {
+        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("skyscrapper_5_0");
         RandomHeuristic heuristic = new RandomHeuristic(item);
         SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
                 item.board, heuristic);
         BacktrackingAlgorithm backtrackingAlgorithm = new BacktrackingAlgorithm(rules, heuristic);
+        CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
+        List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
+        for(int[][] solution: solutions){
+            System.out.println("[");
+            for(int i=0 ; i<solution.length;i++)
+                System.out.println(Arrays.toString(solution[i]));
+            System.out.println("]");
+        }
+    }
+
+    @Test
+    public void testSkyscrapperForConstraints() throws FileNotFoundException {
+        SkyscraperItem item = dataExtractorService.getScascraperItemFromFile("skyscrapper_5_0");
+        RandomHeuristic heuristic = new RandomHeuristic(item);
+        SkyscrapperRules rules = new SkyscrapperRules(item.bottomBound, item.topBound, item.leftBound, item.rightBound,
+                item.board, heuristic);
+        ForwardCheckingAlgorithm backtrackingAlgorithm = new ForwardCheckingAlgorithm(rules, heuristic);
         CSPGameSimulation cspGameSimulation = new CSPGameSimulation(rules, heuristic, backtrackingAlgorithm);
         List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
         for(int[][] solution: solutions){
