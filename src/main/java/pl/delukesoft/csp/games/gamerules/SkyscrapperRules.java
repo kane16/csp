@@ -54,15 +54,10 @@ public class SkyscrapperRules extends Rules{
                 isHorizontalFilled = false;
             }
         }
-        if(!isHorizontalFilled && !isVerticalFilled)
-            return true;
-        if((!isTopConstraintFulfilled(topConstraint, newBoard, node.value, node.column, node.row))
-        || (!isBottomConstraintFulfilled(bottomConstraint, newBoard, node.value, node.column, node.row))
-        || ((!isLeftConstraintFulfilled(leftConstraint, newBoard, node.value, node.column, node.row)))
-        || (!isRightConstraintFulfilled(rightConstraint, newBoard, node.value, node.column, node.row))) {
-            return false;
-        }
-        return true;
+        return (!isHorizontalFilled || isTopConstraintFulfilled(topConstraint, newBoard, node.value, node.column, node.row))
+                && (!isHorizontalFilled || isBottomConstraintFulfilled(bottomConstraint, newBoard, node.value, node.column, node.row))
+                && (!isVerticalFilled || isLeftConstraintFulfilled(leftConstraint, newBoard, node.value, node.column, node.row))
+                && (!isVerticalFilled || isRightConstraintFulfilled(rightConstraint, newBoard, node.value, node.column, node.row));
     }
 
     private boolean isBottomConstraintFulfilled(int bottomConstraint, int[][] board, int value, int column, int row) {
