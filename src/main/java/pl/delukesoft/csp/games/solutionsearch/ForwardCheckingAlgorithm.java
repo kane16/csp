@@ -19,12 +19,11 @@ public class ForwardCheckingAlgorithm extends SearchSolutionAlgorithm{
     @Override
     public List<int[][]> runAlgorithm() {
 
+        long time = System.currentTimeMillis();
 
         rules.eliminateForwardPossibilitiesAndReturnIfCanMoveForward(possibilities);
         checkSolutionsOnNode(heuristic.getNextAvailableNode());
-
-        System.out.println(backtrackCounter);
-        System.out.println(nodesCounter);
+        this.time = System.currentTimeMillis() - time;
         return solutions;
     }
 

@@ -88,6 +88,8 @@ public class CSPDataExtractorService {
         ArrayList<String> constraints = new ArrayList<>();
         while(sc.hasNextLine()){
             String constraint = replaceLettersWithIndexes(sc.nextLine());
+            if(constraint.equals(""))
+                continue;
             constraints.add(constraint);
         }
         futoshikiItem.constraintNodes = new int[futoshikiItem.size][futoshikiItem.size];

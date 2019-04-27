@@ -12,9 +12,11 @@ public abstract class SearchSolutionAlgorithm {
 
     Heuristic heuristic;
 
-    int backtrackCounter;
+    public int backtrackCounter;
 
-    int nodesCounter;
+    public int nodesCounter;
+
+    public long time;
 
     List<int[][]> solutions = new ArrayList<>();
 

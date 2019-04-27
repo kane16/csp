@@ -15,10 +15,9 @@ public class BacktrackingAlgorithm extends SearchSolutionAlgorithm {
     @Override
     public List<int[][]> runAlgorithm() {
 
+        long time = System.currentTimeMillis();
         checkSolutionsOnNode(heuristic.getNextAvailableNodeAndSetPointer());
-
-        System.out.println(backtrackCounter);
-        System.out.println(nodesCounter);
+        this.time = System.currentTimeMillis() - time;
         return solutions;
 
     }
