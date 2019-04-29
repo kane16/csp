@@ -18,7 +18,13 @@ public class Result {
     private String algorithmType;
 
     @Column
-    private String gameName;
+    private String game;
+
+    @Column
+    private int gameName;
+
+    @Column
+    private int variant;
 
     @Column
     private String heuristic;

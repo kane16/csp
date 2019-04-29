@@ -87,7 +87,9 @@ public class FutoshikiRulesTest {
                     List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
                     Result result = new Result();
                     result.setAlgorithmType(algorithmName);
-                    result.setGameName(game);
+                    result.setGame("Futoshiki");
+                    result.setGameName(Integer.parseInt(""+game.charAt(10)));
+                    result.setVariant(Integer.parseInt(""+game.charAt(12)));
                     result.setHeuristic(heuristicName);
                     result.setBacktrackNumber((long)algorithm.backtrackCounter);
                     result.setTime(algorithm.time);
@@ -123,7 +125,9 @@ public class FutoshikiRulesTest {
                     List<int[][]> solutions = cspGameSimulation.runGameAndFindSolutions();
                     Result result = new Result();
                     result.setAlgorithmType(algorithmName);
-                    result.setGameName(game);
+                    result.setGame("Skyscrapper");
+                    result.setGameName(Integer.parseInt(""+game.charAt(9)));
+                    result.setVariant(Integer.parseInt(""+game.charAt(11)));
                     result.setHeuristic(heuristicName);
                     result.setBacktrackNumber((long)algorithm.backtrackCounter);
                     result.setTime(algorithm.time);
